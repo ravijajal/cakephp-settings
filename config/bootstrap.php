@@ -1,19 +1,9 @@
 <?php
-/**
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
+
 use Cake\Core\Configure;
 
 if (!Configure::read('Settings.classname')) {
-    Configure::write('Settings.classname', 'DbAcl');
+    Configure::write('Settings.classname', 'DbSettings');
 }
 if (!Configure::read('Settings.database')) {
     Configure::write('Settings.database', 'default');

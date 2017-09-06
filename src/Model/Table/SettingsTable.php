@@ -3,6 +3,7 @@
 namespace Settings\Model\Table;
 
 use Cake\ORM\Table;
+use Cake\Utility\Inflector;
 
 class SettingsTable extends Table {
 
@@ -13,21 +14,69 @@ class SettingsTable extends Table {
         $this->addBehavior('Timestamp');
     }
 
-    public function setting($name, $value = null, $descrption = null) {
+    public function setting($name, $value = null, $description = null) {
+        $name = $this->convertName($name);
+        $entity = $this->find('all')
+                ->where([$this->alias() . '.name' => $name])
+                ->first();
         if ($value !== null) {
             $save = [
+                'name' => $name,
                 'value' => $value,
-                'descrption' => $descrption !== null ? $descrption : '',
             ];
-            $entityClass = $this->entityClass();
-            $entity = new $entityClass($save);
+            if ($description !== null) {
+                $save['description'] = $description;
+            }
+            if (empty($entity)) {
+                $entity = $this->newEntity($save);
+            } else {
+                $entity = $this->patchEntity($entity, $save);
+            }
             $this->save($entity);
-        } else {
-            $entity = $this->find('all')
-                    ->where([$this->alias() . '.name' => $name])
-                    ->first();
         }
-        return $entity->value;
+        return isset($entity->value) ? $entity->value : '';
+    }
+
+    public function updateValue($name, $value) {
+        $name = $this->convertName($name);
+        $entity = $this->find('all')
+                ->where([$this->alias() . '.name' => $name])
+                ->first();
+        if (!empty($entity)) {
+            $save = [
+                'value' => $value,
+            ];
+            $entity = $this->patchEntity($entity, $save);
+            $this->save($entity);
+        }
+    }
+
+    public function updateDescription($name, $description) {
+        $name = $this->convertName($name);
+        $entity = $this->find('all')
+                ->where([$this->alias() . '.name' => $name])
+                ->first();
+        if (!empty($entity)) {
+            $save = [
+                'description' => $description,
+            ];
+            $entity = $this->patchEntity($entity, $save);
+            $this->save($entity);
+        }
+    }
+
+    public function deleteSetting($name) {
+        $name = $this->convertName($name);
+        $entity = $this->find('all')
+                ->where([$this->alias() . '.name' => $name])
+                ->first();
+        if (!empty($entity)) {
+            $this->delete($entity);
+        }
+    }
+
+    private function convertName($name) {
+        return strtoupper(Inflector::underscore(Inflector::camelize(strtolower($name))));
     }
 
 }

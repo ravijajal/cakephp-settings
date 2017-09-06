@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Settings\Controller\Component;
 
 use Settings\SettingsInterface;
@@ -43,8 +42,20 @@ class SettingsComponent extends Component {
         return $this->_Instance;
     }
 
-    public function setting($name, $value = null, $descrption = null) {
-        return $this->_Instance->setting($name, $value, $descrption);
+    public function setting($name, $value = null, $description = null) {
+        return $this->_Instance->setting($name, $value, $description);
+    }
+
+    public function deleteSetting($name) {
+        return $this->_Instance->deleteSetting($name);
+    }
+
+    public function updateValue($name, $value) {
+        return $this->_Instance->updateValue($name, $value);
+    }
+
+    public function updateDescription($name, $description) {
+        return $this->_Instance->updateDescription($name, $description);
     }
 
 }

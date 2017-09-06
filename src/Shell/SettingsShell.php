@@ -61,7 +61,43 @@ class SettingsShell extends Shell {
      * @return void
      */
     public function setting() {
-        $this->Settings->setting($this->params);
+        $args = $this->args;
+        $countArgs = count($args);
+        $name = '';
+        $value = null;
+        $description = null;
+        if ($countArgs == 1) {
+            list($name) = $args;
+            $value = null;
+            $description = null;
+        } elseif ($countArgs == 2) {
+            list($name, $value) = $args;
+            $description = null;
+        } elseif ($countArgs == 3) {
+            list($name, $value, $description) = $args;
+        }
+        $this->out($this->Settings->setting($name, $value, $description));
+    }
+
+    public function updateValue() {
+        $args = $this->args;
+        list($name, $value) = $args;
+        $this->Settings->updateValue($name, $value);
+        $this->out('Setting value updated successfully');
+    }
+
+    public function updateDescription() {
+        $args = $this->args;
+        list($name, $description) = $args;
+        $this->Settings->updateDescription($name, $description);
+        $this->out('Setting description updated successfully');
+    }
+
+    public function deleteSetting() {
+        $args = $this->args;
+        list($name) = $args;
+        $this->Settings->deleteSetting($name);
+        $this->out('Setting deleted successfully');
     }
 
     /**
@@ -80,6 +116,55 @@ class SettingsShell extends Shell {
                             'name' => [
                                 'required' => true,
                                 'help' => __('The name of setting'),
+                            ],
+                            'value' => [
+                                'required' => false,
+                                'help' => __('The value of setting. If value provided it will be inserted or updated.'),
+                            ],
+                            'description' => [
+                                'required' => false,
+                                'help' => __('The description of setting'),
+                            ]
+                        ]
+                    ]
+                ])
+                ->addSubcommand('delete_setting', [
+                    'help' => __('Delete a setting based on name'),
+                    'parser' => [
+                        'arguments' => [
+                            'name' => [
+                                'required' => true,
+                                'help' => __('The name of setting'),
+                            ]
+                        ]
+                    ]
+                ])
+                ->addSubcommand('update_value', [
+                    'help' => __('Set value based on name'),
+                    'parser' => [
+                        'arguments' => [
+                            'name' => [
+                                'required' => true,
+                                'help' => __('The name of setting'),
+                            ],
+                            'value' => [
+                                'required' => true,
+                                'help' => __('The value of setting'),
+                            ]
+                        ]
+                    ]
+                ])
+                ->addSubcommand('update_description', [
+                    'help' => __('Set description based on name'),
+                    'parser' => [
+                        'arguments' => [
+                            'name' => [
+                                'required' => true,
+                                'help' => __('The name of setting'),
+                            ],
+                            'description' => [
+                                'required' => true,
+                                'help' => __('The description of setting'),
                             ]
                         ]
                     ]

@@ -1,17 +1,5 @@
 <?php
 
-/**
- * Acl Extras.
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright Copyright 2008-2013, Mark Story.
- * @link http://mark-story.com
- * @author Mark Story <mark@mark-story.com>
- * @license http://www.opensource.org/licenses/mit-license.php The MIT License
- */
-
 namespace Settings;
 
 use Settings\Controller\Component\SettingsComponent;
@@ -20,10 +8,6 @@ use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Network\Request;
 
-/**
- * Provides features for additional ACL operations.
- * Can be used in either a CLI or Web context.
- */
 class Settings {
 
     /**
@@ -48,7 +32,7 @@ class Settings {
     public $dataSource = 'default';
 
     /**
-     * Start up And load Acl Component / Aco model
+     * Start up And load Settings Component 
      *
      * @param \Cake\Controller\Controller $controller Controller instance
      * @return void
@@ -94,8 +78,20 @@ class Settings {
         }
     }
 
-    public function setting($params = []) {
-        $this->out(print_r($params, true));
+    public function setting($name, $value, $description) {
+        return $this->Settings->setting($name, $value, $description);
+    }
+
+    public function updateValue($name, $value) {
+        return $this->Settings->updateValue($name, $value);
+    }
+
+    public function updateDescription($name, $description) {
+        return $this->Settings->updateDescription($name, $description);
+    }
+
+    public function deleteSetting($name) {
+        return $this->Settings->deleteSetting($name);
     }
 
 }
