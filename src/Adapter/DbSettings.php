@@ -5,6 +5,7 @@ namespace Settings\Adapter;
 use Settings\SettingsInterface;
 use Cake\Controller\Component;
 use Cake\Core\App;
+use Cake\Core\Exception\Exception;
 use Cake\ORM\TableRegistry;
 
 class DbSettings implements SettingsInterface {
@@ -13,6 +14,8 @@ class DbSettings implements SettingsInterface {
         $config = [];
         if (!TableRegistry::exists('Settings')) {
             $config = ['className' => App::className('Settings.SettingsTable', 'Model/Table')];
+        } else {
+            throw new Exception('settings Table does not exits. Run bin/cake migrations migrate -p Settings');
         }
         $this->Settings = TableRegistry::get('Settings', $config);
     }
