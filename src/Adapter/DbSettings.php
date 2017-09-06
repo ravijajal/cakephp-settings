@@ -11,13 +11,15 @@ use Cake\ORM\TableRegistry;
 class DbSettings implements SettingsInterface {
 
     public function __construct() {
-        $config = [];
-        if (!TableRegistry::exists('Settings')) {
-            $config = ['className' => App::className('Settings.SettingsTable', 'Model/Table')];
-        } else {
+        try {
+            $config = [];
+            if (!TableRegistry::exists('Settings')) {
+                $config = ['className' => App::className('Settings.SettingsTable', 'Model/Table')];
+            }
+            $this->Settings = TableRegistry::get('Settings', $config);
+        } catch (Exception $e) {
             throw new Exception('settings Table does not exits. Run bin/cake migrations migrate -p Settings');
         }
-        $this->Settings = TableRegistry::get('Settings', $config);
     }
 
     public function initialize(Component $component) {
