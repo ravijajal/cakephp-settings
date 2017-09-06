@@ -37,4 +37,8 @@ class DbSettings implements SettingsInterface {
         return $this->Settings->deleteSetting($name);
     }
 
+    public function listSettings() {
+        return $this->Settings->listSettings();
+    }
+
 }
