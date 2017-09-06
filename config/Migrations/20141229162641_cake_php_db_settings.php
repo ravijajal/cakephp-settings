@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class CakePhpDbAcl extends AbstractMigration {
+class CakePhpDbSettings extends AbstractMigration {
 
     public function change() {
         $table = $this->table('settings');
