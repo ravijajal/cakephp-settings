@@ -100,6 +100,21 @@ class SettingsShell extends Shell {
         $this->out('Setting deleted successfully');
     }
 
+    public function listSettings() {
+        $list = $this->Settings->listSettings();
+        $this->hr();
+        $this->out('List of All Settings');
+        $this->hr();
+        if (count($list) > 0) {
+            foreach ($list as $name => $value) {
+                $this->out($name . ' ==> ' . $value);
+            }
+        } else {
+            $this->out('No Settings found.');
+        }
+        $this->hr();
+    }
+
     /**
      * Get the option parser for this shell.
      *
@@ -168,6 +183,9 @@ class SettingsShell extends Shell {
                             ]
                         ]
                     ]
+                ])
+                ->addSubcommand('list_settings', [
+                    'help' => __('List All Settings.'),
         ]);
 
         return $parser;

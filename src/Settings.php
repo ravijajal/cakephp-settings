@@ -42,7 +42,7 @@ class Settings {
             $controller = new Controller(new Request());
         }
         $registry = new ComponentRegistry();
-        $this->Settings = new SettingsComponent($registry, Configure::read('Settings'));
+        $this->Settings = new SettingsComponent($registry, Configure::read('PluginSettings'));
         $this->controller = $controller;
     }
 
@@ -92,6 +92,10 @@ class Settings {
 
     public function deleteSetting($name) {
         return $this->Settings->deleteSetting($name);
+    }
+
+    public function listSettings() {
+        return $this->Settings->listSettings();
     }
 
 }

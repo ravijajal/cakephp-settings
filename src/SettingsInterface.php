@@ -15,4 +15,6 @@ interface SettingsInterface {
     public function updateDescription($name, $description);
 
     public function deleteSetting($name);
+
+    public function listSettings();
 }

@@ -15,7 +15,7 @@ class SettingsComponent extends Component {
 
     public function __construct(ComponentRegistry $collection, array $config = []) {
         parent::__construct($collection, $config);
-        $className = $name = Configure::read('Settings.classname');
+        $className = $name = Configure::read('PluginSettings.classname');
         if (!class_exists($className)) {
             $className = App::className('Settings.' . $name, 'Adapter');
             if (!$className) {
@@ -56,6 +56,10 @@ class SettingsComponent extends Component {
 
     public function updateDescription($name, $description) {
         return $this->_Instance->updateDescription($name, $description);
+    }
+
+    public function listSettings() {
+        return $this->_Instance->listSettings();
     }
 
 }

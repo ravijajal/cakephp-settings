@@ -75,6 +75,14 @@ class SettingsTable extends Table {
         }
     }
 
+    public function listSettings() {
+        $list = $this->find('list', [
+                    'keyField' => 'name',
+                    'valueField' => 'value'
+                ])->toArray();
+        return $list;
+    }
+
     private function convertName($name) {
         return strtoupper(Inflector::underscore(Inflector::camelize(strtolower($name))));
     }
