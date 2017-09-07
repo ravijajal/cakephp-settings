@@ -44,7 +44,7 @@ class SettingsShell extends Shell {
 
         if ($this->command) {
             try {
-                \Cake\ORM\TableRegistry::get('Aros')->schema();
+                \Cake\ORM\TableRegistry::get('Settings')->schema();
             } catch (\Cake\Database\Exception $e) {
                 $this->out(__d('cake_settings', 'Settings database tables not found. To create them, run:'));
                 $this->out();

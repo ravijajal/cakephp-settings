@@ -18,7 +18,7 @@ class DbSettings implements SettingsInterface {
             }
             $this->Settings = TableRegistry::get('Settings', $config);
         } catch (Exception $e) {
-            throw new Exception('settings Table does not exits. Run bin/cake migrations migrate -p Settings');
+            throw new Exception('Settings database tables not found. To create them, run bin/cake migrations migrate -p Settings');
         }
     }
 
