@@ -2,11 +2,11 @@
 
 namespace Settings;
 
-use Settings\Controller\Component\SettingsComponent;
 use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Network\Request;
+use Settings\Controller\Component\SettingsComponent;
 
 class Settings {
 

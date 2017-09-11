@@ -2,12 +2,12 @@
 
 namespace Settings\Controller\Component;
 
-use Settings\SettingsInterface;
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 use Cake\Core\App;
 use Cake\Core\Configure;
 use Cake\Core\Exception\Exception;
+use Settings\SettingsInterface;
 
 class SettingsComponent extends Component {
 

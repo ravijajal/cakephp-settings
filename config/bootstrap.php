@@ -14,3 +14,7 @@ if (!Configure::read('PluginSettings.database')) {
 if (!Configure::read('PluginSettings.databaseTable')) {
     Configure::write('PluginSettings.databaseTable', 'settings');
 }
+//Adapter Class Database table Alias
+if (!Configure::read('PluginSettings.databaseTableAlias')) {
+    Configure::write('PluginSettings.databaseTableAlias', 'Settings');
+}

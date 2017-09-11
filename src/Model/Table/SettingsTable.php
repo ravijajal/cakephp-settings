@@ -10,7 +10,7 @@ class SettingsTable extends Table {
 
     public function initialize(array $config) {
         parent::initialize($config);
-        $this->alias('Settings');
+        $this->alias(Configure::read('PluginSettings.databaseTableAlias'));
         $this->table(Configure::read('PluginSettings.databaseTable'));
         $this->addBehavior('Timestamp');
     }

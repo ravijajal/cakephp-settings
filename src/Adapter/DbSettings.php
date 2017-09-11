@@ -2,21 +2,22 @@
 
 namespace Settings\Adapter;
 
-use Settings\SettingsInterface;
 use Cake\Controller\Component;
 use Cake\Core\App;
+use Cake\Core\Configure;
 use Cake\Core\Exception\Exception;
 use Cake\ORM\TableRegistry;
+use Settings\SettingsInterface;
 
 class DbSettings implements SettingsInterface {
 
     public function __construct() {
         try {
             $config = [];
-            if (!TableRegistry::exists('Settings')) {
+            if (!TableRegistry::exists(Configure::read('PluginSettings.databaseTableAlias'))) {
                 $config = ['className' => App::className('Settings.SettingsTable', 'Model/Table')];
             }
-            $this->Settings = TableRegistry::get('Settings', $config);
+            $this->Settings = TableRegistry::get(Configure::read('PluginSettings.databaseTableAlias'), $config);
         } catch (Exception $e) {
             throw new Exception('Settings database tables not found. To create them, run bin/cake migrations migrate -p Settings');
         }

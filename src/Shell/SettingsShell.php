@@ -5,6 +5,7 @@ namespace Settings\Shell;
 use Settings\Settings;
 use Cake\Console\ConsoleIo;
 use Cake\Console\Shell;
+use Cake\Core\Configure;
 
 class SettingsShell extends Shell {
 
@@ -44,7 +45,7 @@ class SettingsShell extends Shell {
 
         if ($this->command) {
             try {
-                \Cake\ORM\TableRegistry::get('Settings')->schema();
+                \Cake\ORM\TableRegistry::get(Configure::read('PluginSettings.databaseTableAlias'))->schema();
             } catch (\Cake\Database\Exception $e) {
                 $this->out(__d('cake_settings', 'Settings database tables not found. To create them, run:'));
                 $this->out();
