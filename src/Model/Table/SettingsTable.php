@@ -2,6 +2,7 @@
 
 namespace Settings\Model\Table;
 
+use Cake\Core\Configure;
 use Cake\ORM\Table;
 use Cake\Utility\Inflector;
 
@@ -10,7 +11,7 @@ class SettingsTable extends Table {
     public function initialize(array $config) {
         parent::initialize($config);
         $this->alias('Settings');
-        $this->table('settings');
+        $this->table(Configure::read('PluginSettings.databaseTable'));
         $this->addBehavior('Timestamp');
     }
 

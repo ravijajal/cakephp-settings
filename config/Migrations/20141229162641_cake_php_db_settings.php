@@ -1,11 +1,12 @@
 <?php
 
+use Cake\Core\Configure;
 use Phinx\Migration\AbstractMigration;
 
 class CakePhpDbSettings extends AbstractMigration {
 
     public function change() {
-        $table = $this->table('settings');
+        $table = $this->table(Configure::read('PluginSettings.databaseTable'));
         $table
                 ->addColumn('name', 'string', [
                     'default' => null,
