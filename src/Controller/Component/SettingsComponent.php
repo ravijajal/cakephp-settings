@@ -15,7 +15,7 @@ class SettingsComponent extends Component {
 
     public function __construct(ComponentRegistry $collection, array $config = []) {
         parent::__construct($collection, $config);
-        $className = $name = Configure::read('PluginSettings.classname');
+        $className = $name = Configure::read('PluginSettings.adapter');
         if (!class_exists($className)) {
             $className = App::className('Settings.' . $name, 'Adapter');
             if (!$className) {

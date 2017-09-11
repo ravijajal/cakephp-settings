@@ -3,8 +3,8 @@
 use Cake\Core\Configure;
 
 //Adapter Classname
-if (!Configure::read('PluginSettings.classname')) {
-    Configure::write('PluginSettings.classname', 'DbSettings');
+if (!Configure::read('PluginSettings.adapter')) {
+    Configure::write('PluginSettings.adapter', 'DbSettings');
 }
 //Adapter Class Database
 if (!Configure::read('PluginSettings.database')) {
