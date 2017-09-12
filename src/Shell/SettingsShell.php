@@ -40,7 +40,6 @@ class SettingsShell extends Shell {
      */
     public function startup() {
         parent::startup();
-        $this->Settings->startup();
         $this->Settings->Shell = $this;
 
         if ($this->command) {

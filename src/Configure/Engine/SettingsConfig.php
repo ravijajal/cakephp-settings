@@ -18,8 +18,7 @@ class SettingsConfig implements ConfigEngineInterface {
     public function read($key) {
 
         try {
-            $settings = new Settings;
-            $settings->startup();
+            $settings = new Settings();
             $return[$key] = $settings->listSettings();
             if (is_array($return)) {
                 return $return;

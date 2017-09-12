@@ -31,6 +31,10 @@ class Settings {
      */
     public $dataSource = 'default';
 
+    public function __construct() {
+        $this->startup();
+    }
+
     /**
      * Start up And load Settings Component 
      *

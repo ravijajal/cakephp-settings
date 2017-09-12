@@ -48,7 +48,9 @@ class SettingsTable extends Table {
                 'value' => $value,
             ];
             $entity = $this->patchEntity($entity, $save);
-            $this->save($entity);
+            return $this->save($entity);
+        } else {
+            return false;
         }
     }
 
@@ -62,7 +64,9 @@ class SettingsTable extends Table {
                 'description' => $description,
             ];
             $entity = $this->patchEntity($entity, $save);
-            $this->save($entity);
+            return $this->save($entity);
+        } else {
+            return false;
         }
     }
 
@@ -72,7 +76,9 @@ class SettingsTable extends Table {
                 ->where([$this->alias() . '.name' => $name])
                 ->first();
         if (!empty($entity)) {
-            $this->delete($entity);
+            return $this->delete($entity);
+        } else {
+            return false;
         }
     }
 
